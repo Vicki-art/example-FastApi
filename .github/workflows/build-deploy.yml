@@ -96,10 +96,10 @@ jobs:
         host: ${{ secrets.UBUNTU_HOST }}
         username: ${{ secrets.UBUNTU_USERNAME }}
         password: ${{ secrets.UBUNTU_PASSWORD }}
-        script:
+        script: |
           cd app/src
           git pull
-          echo password | sudo -S systemctl restart api
+          sudo systemctl restart api
 
 
 
