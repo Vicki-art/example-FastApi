@@ -1,0 +1,51 @@
+#Version should be chosen depending on you pp requirenments and need. 
+#All version mentioned here: https://docs.docker.com/compose/compose-file/compose-versioning/
+#for the education purpose version 3 will be enought
+version: "3"
+services: 
+  api:
+    build: . #current directory 
+    depends_on: 
+      - postgres #This command says that I want start the postgress container before the api starts
+    command: bash -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    # depends_on:
+    #   - postgres
+    ports: [8000:8000]
+    #   #- 8000:8000 #<localhost port>:<dockerhost port>
+    # env_file: 
+    #   - ./.env
+    volumes: 
+      - ./:/usr/src/app:ro # this part consist of three parts: ./ - means our directory
+      #/usr/src/app - means the path in the container where it runc  
+      #ro - mens read only. Additional security feature that prevents any changes 
+      #to the app from the part of container 
+    environment: 
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_PASSWORD=123
+      - DATABASE_NAME=fastapi
+      - DATABASE_USERNAME=postgres
+      - SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+
+
+#Step 1: Create additional service in docker-compose.yml
+#Step 2: Search requirenments to this service at https://hub.docker.com/_/postgres
+  postgres:
+    image: postgres #As named on the website 
+    environment:
+      - POSTGRES_PASSWORD=123 # we can give anything we want 
+      - POSTGRES_DB=fastapi # the same name as we were using in our development environment
+
+#set the path where all data will be stored even if we kill the container 
+    volumes: 
+      - postgres-db:/var/lib/postgresql/data
+
+#create global postgres data storage so we can reach the same DB from different containers
+#and test different containers using one datatbase 
+volumes:
+  postgres-db:
+
+
+

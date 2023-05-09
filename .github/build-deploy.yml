@@ -1,0 +1,21 @@
+name: Build and Deploy File 
+
+on: [push, pull_request]
+  # push: 
+  #   branches: 
+  #     - "main"
+  #     - "branch2"
+  #     - "branch3"
+
+  # pull_request:
+  #   branches: 
+  #     - ....
+  jobs:
+    job1:
+      runs-on: ubuntu-20.04
+      steps:
+        - name: pulling git repo 
+          uses: actions/checkout@v2
+        - name: say hi to victory 
+          run: echo "hello Victory"
+          

@@ -49,6 +49,7 @@ class PostResponse(PostBase):
     created_at: datetime
     owner_id: int
     owner: CreateUserResponse
+    id: int
 
     class Config():
         orm_mode = True
