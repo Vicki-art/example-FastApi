@@ -76,12 +76,12 @@ jobs:
       #     cache-from: type=registry,ref=user/app:latest
       #     cache-to: type=inline
 
-    deploy:
-      runs-on: ubuntu-20.04
-      needs: [build]
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: [build]
 
-      steps: 
-        name: deploying staff
-        run: echo "going to deploy some stuff"
+    steps: 
+      name: deploying staff
+      run: echo "going to deploy some stuff"
 
 
