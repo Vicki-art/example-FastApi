@@ -81,7 +81,7 @@ jobs:
     needs: [build]
 
     steps: 
-      name: deploying staff
+    - name: deploying staff
       run: echo "going to deploy some stuff"
 
 
