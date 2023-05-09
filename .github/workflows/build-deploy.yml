@@ -11,7 +11,8 @@ on: [push, pull_request]
   #   branches: 
   #     - ....
 jobs:
-  environment: testing
+  environment: 
+    name: testing
   job1:
     env: 
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
