@@ -10,12 +10,11 @@ on: [push, pull_request]
   # pull_request:
   #   branches: 
   #     - ....
-  jobs:
-    job1:
-      runs-on: ubuntu-20.04
-      steps:
-        - name: pulling git repo 
-          uses: actions/checkout@v2
-        - name: say hi to victory 
-          run: echo "hello Victory"
-          
+jobs:
+  job1:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: pulling git repo 
+        uses: actions/checkout@v2
+      - name: say hi to victory 
+        run: echo "hello Victory"
