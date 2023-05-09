@@ -16,5 +16,16 @@ jobs:
     steps:
       - name: pulling git repo 
         uses: actions/checkout@v2
-      - name: say hi to victory 
-        run: echo "hello Victory"
+      - name: install python version 3.9 # We can install many other versions and also check whether
+      #they work on other machines.
+        uses: actions/setup-python@v2 #the same as sudo apt install python
+        with:
+          python-version: "3.9"
+      - name: update pip 
+        run: python -m pip install --upgrade pip
+      - name: install all dependencies 
+        run: pip install -r requirenments.txt
+      - name: test with pytest
+        run: 
+          pip install pytest
+          pytest
